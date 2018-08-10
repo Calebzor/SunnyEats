@@ -1,0 +1,196 @@
+version: 2
+
+references:
+  ## Cache
+
+  cache_key: &cache_key
+    key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}-{{ checksum "weather/build.gradle" }}-{{checksum "restaurants/build.gradle" }}-{{checksum "common/build.gradle" }}-{{ checksum "common_dependencies.gradle" }}
+  restore_cache: &restore_cache
+    restore_cache:
+      <<: *cache_key
+  save_cache: &save_cache
+    save_cache:
+      <<: *cache_key
+      paths:
+        - .gradle
+        - ~/.gradle
+        - ~/.m2
+
+  ## Workspace
+
+  workspace: &workspace
+    ~/workspace
+  attach_debug_workspace: &attach_debug_workspace
+    attach_workspace:
+      at: *workspace
+  persist_debug_workspace: &persist_debug_workspace
+    persist_to_workspace:
+      root: *workspace
+      paths:
+        - common/build/intermediates
+        - common/build/outputs/androidTest-results
+        - common/build/outputs/code-coverage
+        - common/build/test-results
+        - common/build/jacoco
+        - weather/build/intermediates
+        - weather/build/outputs/androidTest-results
+        - weather/build/outputs/code-coverage
+        - weather/build/test-results
+        - weather/build/jacoco
+        - restaurants/build/intermediates
+        - restaurants/build/outputs/androidTest-results
+        - restaurants/build/outputs/code-coverage
+        - restaurants/build/test-results
+        - restaurants/build/jacoco
+        - app/build/intermediates
+        - app/build/outputs/androidTest-results
+        - app/build/outputs/apk
+        - app/build/outputs/code-coverage
+        - app/build/test-results
+        - app/build/jacoco
+
+  ## Docker image configurations
+
+  android_config: &android_config
+    working_directory: *workspace
+    docker:
+      - image: circleci/android:api-27-alpha
+    environment:
+      TERM: dumb
+      JVM_OPTS: -Xmx3200m
+
+
+jobs:
+
+  ## Build debug APK and instrumented test APK run unit tests and list
+
+  test:
+    <<: *android_config
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies
+      - run:
+          name: Assemble debug run lint and unit tests and assemble instrumentation test apk
+          command: ./gradlew lintDebug testDebugUnitTest assembleDebugAndroidTest --parallel
+      - *save_cache
+      - *persist_debug_workspace
+      - store_artifacts:
+          path: app/build/outputs/apk/
+          destination: /apk/
+      - store_artifacts:
+          path: common/build/reports
+          destination: common-reports
+      - store_artifacts:
+          path: weather/build/reports
+          destination: weather-reports
+      - store_artifacts:
+          path: restaurants/build/reports
+          destination: restaurantsp-reports
+      - store_artifacts:
+          path: app/build/reports
+          destination: app-reports
+      - store_test_results:
+          paths:
+             - common/build/test-results
+             - weather/build/test-results
+             - restaurants/build/test-results
+             - app/build/test-results
+
+  coverage_and_sonar:
+    <<: *android_config
+    steps:
+      - checkout
+      - *attach_debug_workspace
+      - *restore_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies
+      - run:
+          name: Merged coverage
+          command: ./gradlew jacocoMergedTestReport
+      - run:
+          name: Sonar preview for github pull requests or sonacloud for non PRs
+          command: if [[ ! -z $CIRCLE_PULL_REQUEST ]] ; then ./gradlew sonarqube -Dsonar.analysis.mode=preview -Dsonar.github.pullRequest=`echo ${CIRCLE_PULL_REQUEST##*/}` -Dsonar.github.repository=Calebzor/SunnyEats -Dsonar.github.oauth=$GITHUB_SONAR_OAUTH ; else ./gradlew sonarqube ; fi
+      - *save_cache
+      - store_artifacts:
+          path: app/build/outputs/apk/
+          destination: /apk/
+      - store_artifacts:
+          path: common/build/reports
+          destination: common-reports
+      - store_artifacts:
+          path: weather/build/reports
+          destination: weather-reports
+      - store_artifacts:
+          path: restaurants/build/reports
+          destination: restaurantsp-reports
+      - store_artifacts:
+          path: app/build/reports
+          destination: app-reports
+
+  release:
+    <<: *android_config
+    environment:
+      FL_OUTPUT_DIR: ~/workspace/output
+      FASTLANE_LANE: release
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: Set Ruby Version
+          command:  echo "ruby-2.4" > ~/.ruby-version
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+          no_output_timeout: 20m
+      - store_artifacts:
+          path: -app/build/outputs/apk/release/app-release.apk
+      - store_artifacts:
+          path: app/build/outputs/mapping/release/mapping.txt
+
+  increment_version:
+    <<: *android_config
+    environment:
+      FL_OUTPUT_DIR: ~/workspace/output
+      FASTLANE_LANE: increment_version
+    steps:
+      - checkout
+      - run:
+          name: Set Ruby Version
+          command:  echo "ruby-2.4" > ~/.ruby-version
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+          no_output_timeout: 20m
+      - run:
+          name: Commit build version
+          command: ./scripts/pushNewVersion.sh
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - test
+      - coverage_and_sonar:
+          filters:
+              branches:
+                only: master
+          requires:
+            - test
+      - release:
+          filters:
+              branches:
+                only: master
+          requires:
+              - coverage_and_sonar
+      - increment_version:
+          filters:
+              branches:
+                only: master
+          requires:
+            - release

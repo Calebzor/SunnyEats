@@ -1,0 +1,36 @@
+task jacocoMergedTestReport(type: JacocoReport) {
+	FileCollection unitTestCoverageFile = files("$buildDir/jacoco/testDebugUnitTest.exec")
+
+	FileCollection coverageFiles = getAndroidTestCoverageFiles() + unitTestCoverageFile
+
+	inputs.files(coverageFiles)
+	outputs.dir("$buildDir/reports/jacoco/jacocoMergedTestReport/html")
+
+	setSourceDirectories(files(["$buildDir/../src/main/java/com"]))
+	setClassDirectories(fileTree(
+			dir: "$buildDir/intermediates/classes/debug/com/rsm",
+			excludes: getCoverageExcludes()))
+
+	setExecutionData(coverageFiles)
+
+	reports {
+		xml.enabled true
+		csv.enabled false
+		html.enabled true
+	}
+}
+
+def getCoverageExcludes(String format) {
+	def excludes = ['**/Manifest*.*',
+					'**/BuildConfig.*',
+					'**/R.class',
+					'**/R$*.class'
+	]
+	if ("Sonar".equals(format)) {
+		return String.join(",", excludes)
+	} else {
+		return excludes
+	}
+}
+
+

@@ -1,0 +1,12 @@
+/**
+ * This file adds default configuration resource values into the default build configuration.
+ */
+
+android {
+
+	defaultConfig {
+
+		// default environment configuration variables (equals to prod)
+		manifestPlaceholders.appNameBuildType = ""
+	}
+}

@@ -12,10 +12,26 @@
 #   public *;
 #}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Preserve the line number information for better debugging of stack traces.
+-keepattributes SourceFile,LineNumberTable
+# Hide the original source file name.
+-renamesourcefileattribute SourceFile
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+## Retrofit (from their docs)
+# Platform calls Class.forName on types which do not exist on Android to determine platform.
+-dontnote retrofit2.Platform
+# Platform used when running on Java 8 VMs. Will not be used at runtime.
+-dontwarn retrofit2.Platform$Java8
+# Retain generic type information for use by reflection by converters and adapters.
+-keepattributes Signature
+# Retain declared checked exceptions for use by a Proxy instance.
+-keepattributes Exceptions
+# Retrofit uses Okio under the hood, rules from Okio docs:
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+
+# https://github.com/google/dagger/issues/645#issuecomment-296851566
+-dontwarn com.google.errorprone.annotations.*
+
+# https://github.com/google/dagger/issues/645#issuecomment-296851566
+-dontwarn com.google.errorprone.annotations.*
