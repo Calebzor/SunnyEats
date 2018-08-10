@@ -1,0 +1,33 @@
+static def readVersion(project) {
+	def versionFile = new File(project.rootDir, 'version.properties')
+	def version = new Properties()
+	def stream
+	try {
+		stream = new FileInputStream(versionFile)
+		version.load(stream)
+	}
+	catch (FileNotFoundException e) {
+		println e
+	}
+	finally {
+		if (stream != null) stream.close()
+	}
+	return version
+}
+
+static def readVersionCode(project) {
+	def version = readVersion(project)
+	def build = version['versionCode'] as int
+	return build
+}
+
+static def readVersionName(project) {
+	def version = readVersion(project)
+	def versionName = "${version['versionName']}" + "." + readVersionCode(project)
+	return versionName
+}
+
+ext {
+	readVersionName = this.&readVersionName
+	readVersionCode = this.&readVersionCode
+}

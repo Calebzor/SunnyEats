@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 apply from: '../versioning.gradle'
 
 android {
 	compileSdkVersion project.ext.globalCompileSDK
-    defaultConfig {
-        applicationId "hu.tvarga.sunnyeats"
+	defaultConfig {
 		minSdkVersion project.ext.globalMinSDK
 		targetSdkVersion project.ext.globalTargetSDK
 		versionCode readVersionCode(project)
@@ -13,8 +12,9 @@ android {
 
 		multiDexEnabled true
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
+		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+	}
 
 	compileOptions {
 		targetCompatibility JavaVersion.VERSION_1_8
@@ -30,12 +30,11 @@ android {
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 	}
+
 }
 
 apply from: '../common_dependencies.gradle'
 
 dependencies {
-	implementation project(":weather")
-	implementation project(":restaurants")
 	implementation project(":common")
 }
