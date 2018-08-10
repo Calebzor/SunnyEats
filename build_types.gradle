@@ -1,0 +1,24 @@
+
+apply from: '../common_build_types.gradle'
+
+android {
+
+	buildTypes {
+		release {
+			minifyEnabled true
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+			signingConfig signingConfigs.release
+		}
+		debug {
+			testCoverageEnabled true
+
+			applicationIdSuffix '.debug'
+
+			signingConfig signingConfigs.release
+
+			// Disable fabric build ID generation for debug builds
+			ext.enableCrashlytics = false
+		}
+	}
+}

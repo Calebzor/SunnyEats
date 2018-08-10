@@ -1,0 +1,15 @@
+android {
+
+	buildTypes {
+		release {
+			buildConfigField "int", "LOG_LEVEL", "5"
+		}
+
+		debug {
+			minifyEnabled false
+			manifestPlaceholders.appNameBuildType = " D"
+
+			buildConfigField "int", "LOG_LEVEL", "0"
+		}
+	}
+}

@@ -1,0 +1,11 @@
+android {
+
+	signingConfigs {
+		release {
+			storeFile file('../etc/dev.jks')
+			keyAlias 'key0'
+			keyPassword 'android'
+			storePassword 'android'
+		}
+	}
+}
