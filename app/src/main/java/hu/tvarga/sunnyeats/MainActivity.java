@@ -3,6 +3,7 @@ package hu.tvarga.sunnyeats;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+@SuppressWarnings("squid:MaximumInheritanceDepth")
 public class MainActivity extends AppCompatActivity {
 
 	@Override

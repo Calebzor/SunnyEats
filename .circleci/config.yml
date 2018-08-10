@@ -177,9 +177,6 @@ workflows:
     jobs:
       - test
       - coverage_and_sonar:
-          filters:
-              branches:
-                only: master
           requires:
             - test
       - release:

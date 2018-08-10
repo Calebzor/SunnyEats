@@ -83,6 +83,7 @@ static def readVersionName(project) {
 sonarqube {
 	androidVariant 'debug'
 	properties {
+		property "sonar.organization", "calebzor-github"
 		property "sonar.projectKey", "SunnyEats"
 		property "sonar.projectName", "SunnyEats"
 		property "sonar.host.url", "https://sonarcloud.io"
