@@ -3,7 +3,24 @@
 dependencies {
 	ext {
 		androidSupportVersion = "27.1.1"
+		retrofitVersion = "2.3.0"
+		daggerVersion = "2.15"
+		okhttpVersion = "3.9.1"
+		reductorVersion = "0.14.0"
+		architectureComponentsVersion = "1.1.1"
+		retrofitVersion = "2.3.0"
 	}
+
+	implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+	implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+	implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+	implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+	// Lightweight streams (like Java 8 + additional/custom operators -- to be avoided for smooth
+	// transition to the original API in the future).
+	implementation 'com.annimon:stream:1.1.9'
+
+	implementation "com.jakewharton.timber:timber:4.5.1"
 
 	implementation "com.android.support:support-annotations:$androidSupportVersion"
 	implementation "com.android.support:support-compat:$androidSupportVersion"
@@ -12,6 +29,41 @@ dependencies {
 	implementation "com.android.support:recyclerview-v7:$androidSupportVersion"
 	implementation "com.android.support:cardview-v7:$androidSupportVersion"
 	implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+	// TODO 10-Aug-2018/vatam: remove as soon as butterknife 9 is out we use snapshot because
+	// of gradle plugin support is not there in earlier versions
+	implementation 'com.jakewharton:butterknife:9.0.0-SNAPSHOT'
+	annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT'
+
+	implementation "android.arch.lifecycle:extensions:$architectureComponentsVersion"
+	implementation "android.arch.lifecycle:common-java8:$architectureComponentsVersion"
+
+	implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+	// Because RxAndroid releases are few and far between, it is recommended you also
+	// explicitly depend on RxJava's latest version for bug fixes and new features.
+	implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
+
+	api "com.google.auto.value:auto-value-annotations:1.6"
+	annotationProcessor "com.google.auto.value:auto-value:1.6"
+
+	implementation "com.yheriatovych:reductor:$reductorVersion"
+	implementation "com.yheriatovych:reductor-rxjava2:$reductorVersion"
+	annotationProcessor "com.yheriatovych:reductor-processor:$reductorVersion"
+
+	implementation 'org.pcollections:pcollections:2.1.2'
+
+	annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+	annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+	implementation "com.google.dagger:dagger:$daggerVersion"
+	implementation "com.google.dagger:dagger-android:$daggerVersion"
+	implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+
+	implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
+	testImplementation 'org.threeten:threetenbp:1.3.6'
+
+	implementation 'nz.bradcampbell:paperparcel:2.0.4'
+	annotationProcessor 'nz.bradcampbell:paperparcel-compiler:2.0.4'
 
 	testImplementation 'junit:junit:4.12'
 	testImplementation 'org.mockito:mockito-core:2.19.1'
