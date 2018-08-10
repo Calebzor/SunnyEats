@@ -148,7 +148,7 @@ jobs:
           command: bundle exec fastlane $FASTLANE_LANE
           no_output_timeout: 20m
       - store_artifacts:
-          path: -app/build/outputs/apk/release/app-release.apk
+          path: app/build/outputs/apk/release/app-release.apk
       - store_artifacts:
           path: app/build/outputs/mapping/release/mapping.txt
 
