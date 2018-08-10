@@ -1,4 +1,4 @@
-package hu.tvarga.sunnyeats;
+package hu.tvarga.sunnyeats.weather;
 
 import org.junit.Test;
 

@@ -5,9 +5,16 @@ buildscript {
     repositories {
         google()
         jcenter()
+		// TODO 10-Aug-2018/vatam: remove as soon as butterknife 9 is out we use snapshot because
+		// of gradle plugin support is not there in earlier versions
+		maven {
+			name 'Sonatype SNAPSHOTs'
+			url 'https://oss.sonatype.org/content/repositories/snapshots/'
+		}
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
+		classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-SNAPSHOT'
         
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -16,10 +23,24 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+	allprojects {
+		project.ext {
+			globalCompileSDK = 27
+			globalMinSDK = 19
+			globalTargetSDK = 27
+		}
+
+		repositories {
+			google()
+			jcenter()
+			// TODO 10-Aug-2018/vatam: remove as soon as butterknife 9 is out we use snapshot because
+			// of gradle plugin support is not there in earlier versions
+			maven {
+				name 'Sonatype SNAPSHOTs'
+				url 'https://oss.sonatype.org/content/repositories/snapshots/'
+			}
+		}
+	}
 }
 
 task clean(type: Delete) {
