@@ -25,7 +25,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import hu.tvarga.sunnyeats.common.app.state.AsyncState;
+import hu.tvarga.sunnyeats.common.app.ui.Screen;
+import hu.tvarga.sunnyeats.common.dto.City;
 import hu.tvarga.sunnyeats.common.ui.BaseFragment;
 import hu.tvarga.sunnyeats.weather.ForecastState;
 import hu.tvarga.sunnyeats.weather.R;
@@ -34,6 +37,8 @@ import hu.tvarga.sunnyeats.weather.dto.Forecast;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 import timber.log.Timber;
+
+import static hu.tvarga.sunnyeats.common.dto.City.CITY_EXTRA_KEY;
 
 public class WeatherFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks {
 
@@ -201,6 +206,16 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 			else if (forecastStateAsyncState.error().isPresent()) {
 				// show error
 			}
+		}
+	}
+
+	@OnClick(R2.id.weatherPopularRestaurantsButton)
+	public void weatherPopularRestaurantsButtonOnClick() {
+		City city = forecastViewModel.getCity();
+		if (city != null) {
+			Bundle extra = new Bundle();
+			extra.putParcelable(CITY_EXTRA_KEY, city);
+			openScreen(Screen.RESTAURANTS, extra);
 		}
 	}
 
