@@ -83,4 +83,11 @@
 		android:layout_height="wrap_content"
 		tools:text="1002 hPa" />
 
+	<Button
+		android:id="@+id/weatherPopularRestaurantsButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAllCaps="true"
+		android:text="@string/common_popular_restaurants" />
+
 </LinearLayout>

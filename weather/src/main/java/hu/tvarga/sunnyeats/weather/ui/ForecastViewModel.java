@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.location.Location;
 import android.support.annotation.NonNull;
 
+import com.annimon.stream.Optional;
+
 import org.pcollections.TreePVector;
 import org.threeten.bp.format.TextStyle;
 
@@ -13,6 +15,7 @@ import javax.inject.Inject;
 import hu.tvarga.sunnyeats.common.app.locale.LocaleProvider;
 import hu.tvarga.sunnyeats.common.app.state.AsyncState;
 import hu.tvarga.sunnyeats.common.app.ui.Strings;
+import hu.tvarga.sunnyeats.common.dto.City;
 import hu.tvarga.sunnyeats.location.LocationLiveData;
 import hu.tvarga.sunnyeats.weather.ForecastState;
 import hu.tvarga.sunnyeats.weather.R;
@@ -181,6 +184,19 @@ public class ForecastViewModel extends ViewModel {
 					forecastListElement.forecastMain().groundLevel());
 		}
 		return getNa();
+	}
+
+	public City getCity() {
+		AsyncState<ForecastState> value = forecastLiveData.getValue();
+		if (value != null && value.value().isPresent()) {
+			ForecastState forecastState = value.value().get();
+			Optional<Forecast> forecastOptional = forecastState.forecast();
+			if (forecastOptional.isPresent()) {
+				Forecast forecast = forecastOptional.get();
+				return forecast.city();
+			}
+		}
+		return null;
 	}
 
 	static class ForecastViewModelFactory implements ViewModelProvider.Factory {
