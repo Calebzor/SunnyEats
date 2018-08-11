@@ -1,7 +1,6 @@
-package hu.tvarga.sunnyeats.modules;
+package hu.tvarga.sunnyeats.weather;
 
 import dagger.Module;
-import hu.tvarga.sunnyeats.weather.WeatherModule;
 import hu.tvarga.sunnyeats.weather.state.ForecastStateModule;
 
 @Module(includes = {WeatherModule.class, ForecastStateModule.class})

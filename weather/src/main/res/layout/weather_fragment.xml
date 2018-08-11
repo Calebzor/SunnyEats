@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	android:orientation="vertical">
 
 	<TextView
 		android:id="@+id/weatherCityName"
@@ -10,4 +11,76 @@
 		android:layout_height="wrap_content"
 		tools:text="Budapest" />
 
-</android.support.constraint.ConstraintLayout>
+	<TextView
+		android:id="@+id/weatherDay"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="Sunday" />
+
+	<TextView
+		android:id="@+id/weatherDescription"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="Sunday" />
+
+	<TextView
+		android:id="@+id/weatherTemp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="37 C" />
+
+	<TextView
+		android:id="@+id/weatherHumidity"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="34%" />
+
+	<TextView
+		android:id="@+id/weatherWindSpeed"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="29 km/h" />
+
+	<TextView
+		android:id="@+id/weatherWindDegree"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="229" />
+
+	<TextView
+		android:id="@+id/weatherClouds"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="88%" />
+
+	<TextView
+		android:id="@+id/weatherTempMin"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="36 C" />
+
+	<TextView
+		android:id="@+id/weatherTempMax"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="38 C" />
+
+	<TextView
+		android:id="@+id/weatherPressure"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="1000 hPa" />
+
+	<TextView
+		android:id="@+id/weatherSeaLevel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="1001 hPa" />
+
+	<TextView
+		android:id="@+id/weatherGroundLevel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="1002 hPa" />
+
+</LinearLayout>

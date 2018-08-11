@@ -5,6 +5,8 @@ import android.app.Application;
 import android.app.Service;
 import android.support.annotation.NonNull;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -29,6 +31,7 @@ public class SunnyEatsApplication extends Application
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		AndroidThreeTen.init(this);
 		if (BuildConfig.DEBUG) {
 			Timber.plant(new Timber.DebugTree());
 		}

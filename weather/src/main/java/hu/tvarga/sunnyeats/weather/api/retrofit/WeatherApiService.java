@@ -12,5 +12,6 @@ public interface WeatherApiService {
 	Single<ForecastApiObject> fetchForecast(
 			@Query(ApiConstants.QUERY_PARAM_WEATHER_LOCATION_LATITUDE) String latitude,
 			@Query(ApiConstants.QUERY_PARAM_WEATHER_LOCATION_LONGITUDE) String longitude,
+			@Query(ApiConstants.QUERY_PARAM_FORMAT) String units,
 			@Query(ApiConstants.QUERY_PARAM_API_KEY) String apiKey);
 }

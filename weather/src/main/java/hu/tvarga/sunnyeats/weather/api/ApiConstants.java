@@ -14,5 +14,7 @@ public final class ApiConstants {
 
 	public static final String QUERY_PARAM_WEATHER_LOCATION_LONGITUDE = "lon";
 
+	public static final String QUERY_PARAM_FORMAT = "units";
+
 	public static final String URL_FORECAST = "data/2.5/forecast";
 }

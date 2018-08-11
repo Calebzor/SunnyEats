@@ -27,6 +27,42 @@ public class WeatherFragment extends BaseFragment {
 	@BindView(R2.id.weatherCityName)
 	TextView weatherCityName;
 
+	@BindView(R2.id.weatherDay)
+	TextView weatherDay;
+
+	@BindView(R2.id.weatherDescription)
+	TextView weatherDescription;
+
+	@BindView(R2.id.weatherTemp)
+	TextView weatherTemp;
+
+	@BindView(R2.id.weatherHumidity)
+	TextView weatherHumidity;
+
+	@BindView(R2.id.weatherWindSpeed)
+	TextView weatherWindSpeed;
+
+	@BindView(R2.id.weatherWindDegree)
+	TextView weatherWindDegree;
+
+	@BindView(R2.id.weatherClouds)
+	TextView weatherClouds;
+
+	@BindView(R2.id.weatherTempMin)
+	TextView weatherTempMin;
+
+	@BindView(R2.id.weatherTempMax)
+	TextView weatherTempMax;
+
+	@BindView(R2.id.weatherPressure)
+	TextView weatherPressure;
+
+	@BindView(R2.id.weatherSeaLevel)
+	TextView weatherSeaLevel;
+
+	@BindView(R2.id.weatherGroundLevel)
+	TextView weatherGroundLevel;
+
 	@Inject
 	ForecastViewModel.ForecastViewModelFactory forecastViewModelFactory;
 
@@ -67,6 +103,18 @@ public class WeatherFragment extends BaseFragment {
 			if (forecastOptional.isPresent()) {
 				Forecast forecast = forecastOptional.get();
 				weatherCityName.setText(forecast.city().name());
+				weatherDay.setText(forecastViewModel.getDay(0));
+				weatherDescription.setText(forecastViewModel.getDescription(0));
+				weatherTemp.setText(forecastViewModel.getTemp(0));
+				weatherHumidity.setText(forecastViewModel.getHumidity(0));
+				weatherWindSpeed.setText(forecastViewModel.getWindSpeed(0));
+				weatherWindDegree.setText(forecastViewModel.getWindDegree(0));
+				weatherClouds.setText(forecastViewModel.getClouds(0));
+				weatherTempMin.setText(forecastViewModel.getTempMin(0));
+				weatherTempMax.setText(forecastViewModel.getTempMax(0));
+				weatherPressure.setText(forecastViewModel.getPressure(0));
+				weatherSeaLevel.setText(forecastViewModel.getSeaLevel(0));
+				weatherGroundLevel.setText(forecastViewModel.getGroundLevel(0));
 			}
 			else if (forecastStateAsyncState.loading()) {
 				// show loading
