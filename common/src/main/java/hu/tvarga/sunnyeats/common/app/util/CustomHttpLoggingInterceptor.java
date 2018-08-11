@@ -39,8 +39,6 @@ import timber.log.Timber;
  */
 public class CustomHttpLoggingInterceptor implements Interceptor {
 
-	private static final String NETWORK_TAG = "NETWORK";
-
 	private static final Charset UTF8 = Charset.forName("UTF-8");
 
 	private static final char NL = '\n';
@@ -145,7 +143,7 @@ public class CustomHttpLoggingInterceptor implements Interceptor {
 						"-byte body omitted)").append(NL);
 			}
 		}
-		Timber.d(NETWORK_TAG, sb.toString());
+		Timber.d(sb.toString());
 		sb = new StringBuilder().append(NL);
 
 		long startNs = System.nanoTime();
@@ -203,7 +201,7 @@ public class CustomHttpLoggingInterceptor implements Interceptor {
 						sb.append("Couldn't decode the response body; charset is likely malformed.")
 								.append(NL);
 						sb.append("<-- END HTTP").append(NL);
-						Timber.d(NETWORK_TAG, sb.toString());
+						Timber.d(sb.toString());
 						return response;
 					}
 				}
@@ -212,7 +210,7 @@ public class CustomHttpLoggingInterceptor implements Interceptor {
 					sb.append("").append(NL);
 					sb.append("<-- END HTTP (binary " + buffer.size() + "-byte body omitted)")
 							.append(NL);
-					Timber.d(NETWORK_TAG, sb.toString());
+					Timber.d(sb.toString());
 					return response;
 				}
 
@@ -233,7 +231,7 @@ public class CustomHttpLoggingInterceptor implements Interceptor {
 				buffer.close();
 			}
 		}
-		Timber.d(NETWORK_TAG, sb.toString());
+		Timber.d(sb.toString());
 		return response;
 	}
 

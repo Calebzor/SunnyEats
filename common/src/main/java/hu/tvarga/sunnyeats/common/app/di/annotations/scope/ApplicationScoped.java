@@ -1,4 +1,4 @@
-package hu.tvarga.sunnyeats.app.di.di.annotations.scope;
+package hu.tvarga.sunnyeats.common.app.di.annotations.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

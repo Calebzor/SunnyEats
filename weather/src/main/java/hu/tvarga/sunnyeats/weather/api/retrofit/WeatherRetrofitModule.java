@@ -1,4 +1,4 @@
-package hu.tvarga.sunnyeats.common.app.api.retrofit;
+package hu.tvarga.sunnyeats.weather.api.retrofit;
 
 import android.content.Context;
 
@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
 import dagger.Provides;
-import hu.tvarga.sunnyeats.app.di.di.annotations.qualifiers.ApplicationContext;
-import hu.tvarga.sunnyeats.app.di.di.annotations.scope.ApplicationScoped;
+import hu.tvarga.sunnyeats.common.app.di.annotations.qualifiers.ApplicationContext;
+import hu.tvarga.sunnyeats.common.app.di.annotations.scope.ApplicationScoped;
 import hu.tvarga.sunnyeats.common.app.util.CustomHttpLoggingInterceptor;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -19,15 +19,15 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class RetrofitModule {
+public class WeatherRetrofitModule {
 
 	private OkHttpClient client;
 
 	@Provides
 	@ApplicationScoped
-	Retrofit provideRetrofit(@ApplicationContext Context context, Gson gson) {
+	Retrofit provideWeatherRetrofit(@ApplicationContext Context context, Gson gson) {
 		if (client == null) {
-			File cacheFile = new File(context.getCacheDir(), "okHttpCache");
+			File cacheFile = new File(context.getCacheDir(), "weatherOkHttpCache");
 
 			Cache cache = new Cache(cacheFile, 1024 * 1024);
 
@@ -39,7 +39,7 @@ public class RetrofitModule {
 					TimeUnit.SECONDS).build();
 		}
 
-		return new Retrofit.Builder().baseUrl("http://www.something.com/").addConverterFactory(
+		return new Retrofit.Builder().baseUrl("http://api.openweathermap.org/").addConverterFactory(
 				GsonConverterFactory.create(gson)).addCallAdapterFactory(
 				RxJava2CallAdapterFactory.create()).client(client).build();
 	}

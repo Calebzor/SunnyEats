@@ -12,9 +12,9 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import dagger.android.HasServiceInjector;
 import hu.tvarga.sunnyeats.BuildConfig;
-import hu.tvarga.sunnyeats.app.di.di.ApplicationComponent;
-import hu.tvarga.sunnyeats.app.di.di.BaseApplicationModule;
-import hu.tvarga.sunnyeats.app.di.di.DaggerApplicationComponent;
+import hu.tvarga.sunnyeats.app.di.ApplicationComponent;
+import hu.tvarga.sunnyeats.app.di.BaseApplicationModule;
+import hu.tvarga.sunnyeats.app.di.DaggerApplicationComponent;
 import timber.log.Timber;
 
 public class SunnyEatsApplication extends Application
