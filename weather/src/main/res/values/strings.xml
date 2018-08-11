@@ -1,3 +1,22 @@
 <resources>
 	<string name="app_name">weather</string>
+
+	<string name="weather_unit_celsius">%s C</string>
+	<string name="weather_unit_hpa">%s hPa</string>
+	<string name="weather_unit_wind_speed">%s m/s</string>
+	<string name="weather_unit_wind_degree">%s deg</string>
+
+	<style name="weather_humidity">Humidity</style>
+
+	<style name="weather_wind">Wind</style>
+
+	<style name="weather_sea_level">Sea level</style>
+
+	<style name="weather_ground_level">Ground level</style>
+
+	<style name="weather_clouds">Clouds</style>
+
+	<style name="weather_min">min</style>
+
+	<style name="weather_max">max</style>
 </resources>

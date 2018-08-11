@@ -5,6 +5,8 @@ import android.app.Application;
 import android.app.Service;
 import android.support.annotation.NonNull;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -12,9 +14,9 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import dagger.android.HasServiceInjector;
 import hu.tvarga.sunnyeats.BuildConfig;
-import hu.tvarga.sunnyeats.app.di.di.ApplicationComponent;
-import hu.tvarga.sunnyeats.app.di.di.BaseApplicationModule;
-import hu.tvarga.sunnyeats.app.di.di.DaggerApplicationComponent;
+import hu.tvarga.sunnyeats.app.di.ApplicationComponent;
+import hu.tvarga.sunnyeats.app.di.BaseApplicationModule;
+import hu.tvarga.sunnyeats.app.di.DaggerApplicationComponent;
 import timber.log.Timber;
 
 public class SunnyEatsApplication extends Application
@@ -29,6 +31,7 @@ public class SunnyEatsApplication extends Application
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		AndroidThreeTen.init(this);
 		if (BuildConfig.DEBUG) {
 			Timber.plant(new Timber.DebugTree());
 		}

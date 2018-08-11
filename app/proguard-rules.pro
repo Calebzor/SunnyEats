@@ -35,3 +35,9 @@
 
 # https://github.com/google/dagger/issues/645#issuecomment-296851566
 -dontwarn com.google.errorprone.annotations.*
+
+-keepclassmembers class hu.tvarga.sunnyeats.**ApiObject {
+    !static !transient <fields>;
+}
+
+-keepclassmembers enum hu.tvarga.sunnyeats.**ApiObject { *; }

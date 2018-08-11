@@ -92,5 +92,7 @@ sonarqube {
 		property "sonar.sourceEncoding", "UTF-8"
 		property "sonar.projectVersion", readVersionName(project)
 		property "sonar.project.version", readVersionName(project)
+
+		property "sonar.exclusions", "**/*ApiObject.java"
 	}
 }

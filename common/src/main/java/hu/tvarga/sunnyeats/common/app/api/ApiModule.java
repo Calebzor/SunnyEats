@@ -8,7 +8,7 @@ import org.threeten.bp.format.DateTimeFormatter;
 
 import dagger.Module;
 import dagger.Provides;
-import hu.tvarga.sunnyeats.app.di.di.annotations.scope.ApplicationScoped;
+import hu.tvarga.sunnyeats.common.app.di.annotations.scope.ApplicationScoped;
 
 @Module
 public class ApiModule {
