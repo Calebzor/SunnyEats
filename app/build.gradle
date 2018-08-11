@@ -59,6 +59,9 @@ dependencies {
 	implementation project(":weather")
 	implementation project(":restaurants")
 	implementation project(":common")
+
+	implementation "pub.devrel:easypermissions:1.1.3"
+	implementation 'com.google.android.gms:play-services-location:15.0.1'
 }
 
 def getAndroidTestCoverageFiles() {

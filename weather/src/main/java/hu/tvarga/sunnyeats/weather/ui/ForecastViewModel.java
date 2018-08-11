@@ -2,6 +2,7 @@ package hu.tvarga.sunnyeats.weather.ui;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.location.Location;
 import android.support.annotation.NonNull;
 
 import org.pcollections.TreePVector;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import hu.tvarga.sunnyeats.common.app.locale.LocaleProvider;
 import hu.tvarga.sunnyeats.common.app.state.AsyncState;
 import hu.tvarga.sunnyeats.common.app.ui.Strings;
+import hu.tvarga.sunnyeats.location.LocationLiveData;
 import hu.tvarga.sunnyeats.weather.ForecastState;
 import hu.tvarga.sunnyeats.weather.R;
 import hu.tvarga.sunnyeats.weather.dto.Forecast;
@@ -23,6 +25,8 @@ public class ForecastViewModel extends ViewModel {
 
 	private final ForecastLiveData forecastLiveData;
 
+	private final LocationLiveData locationLiveData;
+
 	private final ForecastStateInteractor forecastStateInteractor;
 
 	private final LocaleProvider localeProvider;
@@ -31,19 +35,24 @@ public class ForecastViewModel extends ViewModel {
 
 	public ForecastViewModel(ForecastLiveData forecastLiveData,
 			ForecastStateInteractor forecastStateInteractor, LocaleProvider localeProvider,
-			Strings strings) {
+			Strings strings, LocationLiveData locationLiveData) {
 		this.forecastLiveData = forecastLiveData;
 		this.forecastStateInteractor = forecastStateInteractor;
 		this.localeProvider = localeProvider;
 		this.strings = strings;
+		this.locationLiveData = locationLiveData;
 	}
 
 	public ForecastLiveData getForecastLiveData() {
 		return forecastLiveData;
 	}
 
-	public void fetchForecast() {
-		forecastStateInteractor.fetchForecast();
+	public LocationLiveData getLocationLiveData() {
+		return locationLiveData;
+	}
+
+	public void fetchForecast(@NonNull Location location) {
+		forecastStateInteractor.fetchForecast(location);
 	}
 
 	private ForecastListElement getForecastListElement(int index) {
@@ -184,14 +193,17 @@ public class ForecastViewModel extends ViewModel {
 
 		private final Strings strings;
 
+		private final LocationLiveData locationLiveData;
+
 		@Inject
 		public ForecastViewModelFactory(ForecastLiveData forecastLiveData,
 				ForecastStateInteractor forecastStateInteractor, LocaleProvider localeProvider,
-				Strings strings) {
+				Strings strings, LocationLiveData locationLiveData) {
 			this.forecastLiveData = forecastLiveData;
 			this.forecastStateInteractor = forecastStateInteractor;
 			this.localeProvider = localeProvider;
 			this.strings = strings;
+			this.locationLiveData = locationLiveData;
 		}
 
 		@NonNull
@@ -199,7 +211,7 @@ public class ForecastViewModel extends ViewModel {
 		public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 			//noinspection unchecked
 			return (T) new ForecastViewModel(forecastLiveData, forecastStateInteractor,
-					localeProvider, strings);
+					localeProvider, strings, locationLiveData);
 		}
 	}
 }
