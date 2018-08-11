@@ -6,17 +6,21 @@
 	<string name="weather_unit_wind_speed">%s m/s</string>
 	<string name="weather_unit_wind_degree">%s deg</string>
 
-	<style name="weather_humidity">Humidity</style>
+	<string name="weather_humidity">Humidity</string>
+	<string name="weather_wind">Wind</string>
+	<string name="weather_sea_level">Sea level</string>
+	<string name="weather_ground_level">Ground level</string>
+	<string name="weather_clouds">Clouds</string>
+	<string name="weather_min">min</string>
+	<string name="weather_max">max</string>
 
-	<style name="weather_wind">Wind</style>
+	<string name="weather_locationPermission_rational">We need permission to access the
+		devices location</string>
 
-	<style name="weather_sea_level">Sea level</style>
+	<string name="weather_gpsDisabledDialog_rational">"Your GPS seems to be disabled, Please
+		enable it in the settings."</string>
+	<string name="weather_gpsDisabledDialog_button_goToSettings">"Go to settings"</string>
 
-	<style name="weather_ground_level">Ground level</style>
-
-	<style name="weather_clouds">Clouds</style>
-
-	<style name="weather_min">min</style>
-
-	<style name="weather_max">max</style>
+	<string name="weather_locationDialog_permissionDeniedRational">"The app can't be used without
+		this permission"</string>
 </resources>

@@ -6,9 +6,9 @@ task jacocoMergedTestReport(type: JacocoReport) {
 	inputs.files(coverageFiles)
 	outputs.dir("$buildDir/reports/jacoco/jacocoMergedTestReport/html")
 
-	setSourceDirectories(files(["$buildDir/../src/main/java/com"]))
+	setSourceDirectories(files(["$buildDir/../src/main/java/hu"]))
 	setClassDirectories(fileTree(
-			dir: "$buildDir/intermediates/classes/debug/com/rsm",
+			dir: "$buildDir/intermediates/classes/debug/hu/tvarga",
 			excludes: getCoverageExcludes()))
 
 	setExecutionData(coverageFiles)
