@@ -15,7 +15,5 @@ class LocationProviderImpl implements LocationProvider {
 	public Location get() {
 		// Szalkszentmarton
 		return Location.create("19", "47");
-		// invalid aka no city
-		//		return Location.create("47", "19");
 	}
 }

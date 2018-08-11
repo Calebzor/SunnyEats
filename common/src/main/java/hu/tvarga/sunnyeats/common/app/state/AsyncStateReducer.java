@@ -1,6 +1,6 @@
 package hu.tvarga.sunnyeats.common.app.state;
 
-// TODO: when Reductor 0.15.0 gets released, add Reducer interface here and remove it
+// When Reductor 0.15.0 gets released, add Reducer interface here and remove it
 // from its child classes, fixing PR: https://github.com/Yarikx/reductor/pull/36
 @SuppressWarnings("squid:S1172")
 public abstract class AsyncStateReducer<T> {

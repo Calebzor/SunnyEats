@@ -1,6 +1,10 @@
 package hu.tvarga.sunnyeats.weather.api;
 
-public class ApiConstants {
+public final class ApiConstants {
+
+	private ApiConstants() {
+		// hiding constructor of constant class
+	}
 
 	public static final String WEATHER_API_KEY = "239413e963d181849132e7ca90ee3e45";
 
