@@ -46,9 +46,13 @@
 -dontwarn com.google.android.gms.**
 
 -keep class org.joda.time.** { *; }
+-dontwarn org.joda.time.**
 
--keep okhttp3.internal.platform.** { *; }
+-keep class okhttp3.internal.platform.** { *; }
+-dontwarn okhttp3.internal.platform.**
 
--keep com.google.maps.internal.** { *; }
+-keep class com.google.maps.internal.** { *; }
+-dontwarn com.google.maps.internal.**
 
--keep com.google.maps.GaeRequestHandler { *; }
+-keep class com.google.maps.GaeRequestHandler { *; }
+-dontwarn com.google.maps.GaeRequestHandler
