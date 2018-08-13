@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -166,6 +167,7 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 					LocationServices.getFusedLocationProviderClient(requireActivity());
 			try {
 				// for our use case just getting the last location is fine
+				new Handler().postDelayed(this::handlePotentialMissingLocation, 10000);
 				fusedLocationProviderClient.getLastLocation().addOnSuccessListener(
 						requireActivity(), location -> {
 							if (location != null) {
@@ -176,6 +178,13 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 			catch (SecurityException unlikely) {
 				Timber.e(unlikely, "Lost location permission.");
 			}
+		}
+	}
+
+	private void handlePotentialMissingLocation() {
+		Location value = forecastViewModel.getLocationLiveData().getValue();
+		if (value == null) {
+			showError();
 		}
 	}
 
@@ -218,10 +227,14 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 				weatherLoadingIndicator.show();
 			}
 			else if (forecastStateAsyncState.error().isPresent()) {
-				weatherLoadingIndicator.setText(R.string.weather_error);
-				weatherLoadingIndicator.hideLoadingIndicator();
+				showError();
 			}
 		}
+	}
+
+	private void showError() {
+		weatherLoadingIndicator.setText(R.string.weather_error);
+		weatherLoadingIndicator.hideLoadingIndicator();
 	}
 
 	@OnClick(R2.id.weatherPopularRestaurantsButton)
