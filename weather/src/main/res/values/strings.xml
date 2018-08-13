@@ -30,4 +30,6 @@
 	<string name="weather_locationDialog_permissionDeniedRational">"The app can't be used without
 		this permission"</string>
 
+	<string name="weather_error">An error happened while loading the forecast</string>
+	<string name="weather_loading">Loading forecast data</string>
 </resources>

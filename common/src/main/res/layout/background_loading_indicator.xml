@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:animateLayoutChanges="true"
+	android:gravity="center"
+	tools:orientation="horizontal"
+	tools:parentTag="android.widget.LinearLayout">
+
+	<TextView
+		android:id="@+id/backgroundLoadingIndicatorText"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/marginSmall"
+		android:textStyle="bold"
+		tools:text="Loading Content" />
+
+	<ProgressBar
+		android:id="@+id/backgroundLoadingIndicatorProgressBar"
+		android:layout_width="24dp"
+		android:layout_height="24dp"
+		android:indeterminate="true" />
+</merge>

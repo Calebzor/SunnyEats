@@ -70,10 +70,7 @@ public class MainActivity extends DaggerAppCompatActivity
 
 	@Override
 	public void onBackStackChanged() {
-		FragmentManager supportFragmentManager = getSupportFragmentManager();
-		int stackEntryCount = supportFragmentManager.getBackStackEntryCount();
-
-		boolean isUp = stackEntryCount > 1;
+		boolean isUp = isUp();
 
 		ActionBar supportActionBar = getSupportActionBar();
 		if (supportActionBar != null) {
@@ -85,13 +82,26 @@ public class MainActivity extends DaggerAppCompatActivity
 		}
 	}
 
+	private boolean isUp() {
+		FragmentManager supportFragmentManager = getSupportFragmentManager();
+		int stackEntryCount = supportFragmentManager.getBackStackEntryCount();
+
+		return stackEntryCount > 1;
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
+		if (item.getItemId() == android.R.id.home && isUp()) {
 			onBackPressed();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	public void onBackPressed() {
+		if (isUp()) {
+			super.onBackPressed();
+		}
+	}
 }
