@@ -19,8 +19,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import hu.tvarga.sunnyeats.common.app.util.StringUtils;
 import hu.tvarga.sunnyeats.common.dto.City;
 import hu.tvarga.sunnyeats.common.dto.Location;
+import hu.tvarga.sunnyeats.restaurants.BuildConfig;
 import hu.tvarga.sunnyeats.restaurants.RestaurantsRepository;
 import hu.tvarga.sunnyeats.restaurants.dto.Restaurant;
 import io.reactivex.Single;
@@ -39,8 +41,11 @@ public class RestaurantApiService implements RestaurantsRepository {
 	// very very rudimentary solution
 	@Override
 	public Single<List<Restaurant>> getRestaurants(City city) {
-		GeoApiContext context = new GeoApiContext.Builder().apiKey(
-				"AIzaSyBzUUVJdMfinTY05zcbuQQOrFg5O0h4uR4").build();
+		String cfgPlacesApiKey = BuildConfig.cfg_places_api_key;
+		if (StringUtils.isNullOrEmpty(cfgPlacesApiKey)) {
+			return Single.error(new NullPointerException("missing api key"));
+		}
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(cfgPlacesApiKey).build();
 
 		List<Restaurant> restaurants = new LinkedList<>();
 		try {
