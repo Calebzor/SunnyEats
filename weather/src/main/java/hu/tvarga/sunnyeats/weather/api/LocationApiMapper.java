@@ -13,9 +13,6 @@ public class LocationApiMapper {
 	}
 
 	public Location mapToLocation(CoordApiObject coordApiObject) {
-		if (coordApiObject.lat == null || coordApiObject.lon == null) {
-			return null;
-		}
 		return Location.create(coordApiObject.lat, coordApiObject.lon);
 	}
 }

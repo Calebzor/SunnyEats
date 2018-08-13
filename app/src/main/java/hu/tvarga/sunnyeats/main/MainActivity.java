@@ -1,8 +1,11 @@
 package hu.tvarga.sunnyeats.main;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.transition.Slide;
+import android.view.MenuItem;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import hu.tvarga.sunnyeats.R;
@@ -13,7 +16,7 @@ import hu.tvarga.sunnyeats.weather.ui.WeatherFragment;
 
 @SuppressWarnings("squid:MaximumInheritanceDepth")
 public class MainActivity extends DaggerAppCompatActivity
-		implements BaseFragment.FragmentNavigator {
+		implements BaseFragment.FragmentNavigator, FragmentManager.OnBackStackChangedListener {
 
 	public static final int FRAGMENT_CONTAINER_ID = R.id.fragmentContainer;
 
@@ -22,8 +25,14 @@ public class MainActivity extends DaggerAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		FragmentManager supportFragmentManager = getSupportFragmentManager();
+		supportFragmentManager.addOnBackStackChangedListener(this);
+
 		if (savedInstanceState == null) {
 			setInitialFragment(WeatherFragment.create());
+		}
+		else {
+			onBackStackChanged();
 		}
 	}
 
@@ -58,4 +67,31 @@ public class MainActivity extends DaggerAppCompatActivity
 		}
 		fragmentTransaction.commit();
 	}
+
+	@Override
+	public void onBackStackChanged() {
+		FragmentManager supportFragmentManager = getSupportFragmentManager();
+		int stackEntryCount = supportFragmentManager.getBackStackEntryCount();
+
+		boolean isUp = stackEntryCount > 1;
+
+		ActionBar supportActionBar = getSupportActionBar();
+		if (supportActionBar != null) {
+			supportActionBar.setDisplayHomeAsUpEnabled(isUp);
+			supportActionBar.show();
+			if (!isUp) {
+				supportActionBar.hide();
+			}
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			onBackPressed();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 }
