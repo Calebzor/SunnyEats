@@ -10,3 +10,7 @@ Android app for weather info and nearby restaurants
 ## Quality
 ### Sonar
 [![Quality Gate](https://sonarcloud.io/api/badges/gate?key=SunnyEats)](https://sonarcloud.io/dashboard/index/SunnyEats)
+
+## Credits
+
+Icon made by https://www.flaticon.com/authors/smashicons from www.flaticon.com

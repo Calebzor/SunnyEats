@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import hu.tvarga.sunnyeats.app.layout.BackgroundLoadingIndicator;
 import hu.tvarga.sunnyeats.common.app.state.AsyncState;
 import hu.tvarga.sunnyeats.common.app.ui.Screen;
 import hu.tvarga.sunnyeats.common.dto.City;
@@ -47,6 +49,9 @@ import static hu.tvarga.sunnyeats.common.dto.City.CITY_EXTRA_KEY;
 public class WeatherFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks {
 
 	public static final int REQUEST_CODE_PERMISSIONS = 1;
+
+	@BindView(R2.id.weatherPopularRestaurantsButton)
+	Button weatherPopularRestaurantsButton;
 
 	@BindView(R2.id.weatherCityName)
 	TextView weatherCityName;
@@ -71,6 +76,9 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 
 	@BindView(R2.id.weatherForecastRecyclerView)
 	RecyclerView weatherForecastRecyclerView;
+
+	@BindView(R2.id.weatherLoadingIndicator)
+	BackgroundLoadingIndicator weatherLoadingIndicator;
 
 	@Inject
 	WeatherForecastAdapter weatherForecastAdapter;
@@ -190,6 +198,8 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 			ForecastState forecastState = forecastStateAsyncState.value().get();
 			Optional<Forecast> forecastOptional = forecastState.forecast();
 			if (forecastOptional.isPresent()) {
+				weatherLoadingIndicator.hide();
+				weatherPopularRestaurantsButton.setVisibility(View.VISIBLE);
 				Forecast forecast = forecastOptional.get();
 				ForecastListElement forecastListElementFirst = forecast.list().get(0);
 				CloudIconHelper.setCloudIcon(weatherCloudsImage, forecastListElementFirst);
@@ -204,10 +214,12 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 				weatherViewPagerAdapter.notifyDataSetChanged();
 			}
 			else if (forecastStateAsyncState.loading()) {
-				// show loading
+				weatherLoadingIndicator.setText(R.string.weather_loading);
+				weatherLoadingIndicator.show();
 			}
 			else if (forecastStateAsyncState.error().isPresent()) {
-				// show error
+				weatherLoadingIndicator.setText(R.string.weather_error);
+				weatherLoadingIndicator.hideLoadingIndicator();
 			}
 		}
 	}

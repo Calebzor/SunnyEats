@@ -20,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import hu.tvarga.sunnyeats.app.layout.BackgroundLoadingIndicator;
 import hu.tvarga.sunnyeats.common.app.state.AsyncState;
 import hu.tvarga.sunnyeats.common.dto.City;
 import hu.tvarga.sunnyeats.common.ui.BaseFragment;
@@ -35,6 +36,9 @@ public class RestaurantsFragment extends BaseFragment {
 
 	@BindView(R2.id.restaurantsRecyclerView)
 	RecyclerView restaurantsRecyclerView;
+
+	@BindView(R2.id.restaurantLoadingIndicator)
+	BackgroundLoadingIndicator restaurantLoadingIndicator;
 
 	@Inject
 	RestaurantAdapter restaurantAdapter;
@@ -106,16 +110,18 @@ public class RestaurantsFragment extends BaseFragment {
 			RestaurantsState restaurantsState = restaurantsStateAsyncState.value().get();
 			Optional<List<Restaurant>> restaurantsOptional = restaurantsState.restaurants();
 			if (restaurantsOptional.isPresent()) {
+				restaurantLoadingIndicator.hide();
 				List<Restaurant> restaurants = restaurantsOptional.get();
 				restaurantAdapter.setRestaurants(restaurants);
 			}
+			else if (restaurantsStateAsyncState.loading()) {
+				restaurantLoadingIndicator.setText(R.string.restaurant_loading);
+				restaurantLoadingIndicator.show();
+			}
+			else if (restaurantsStateAsyncState.error().isPresent()) {
+				restaurantLoadingIndicator.setText(R.string.restaurant_error);
+				restaurantLoadingIndicator.hideLoadingIndicator();
+			}
 		}
-		else if (restaurantsStateAsyncState.loading()) {
-			// show loading
-		}
-		else if (restaurantsStateAsyncState.error().isPresent()) {
-			// show error
-		}
-
 	}
 }
