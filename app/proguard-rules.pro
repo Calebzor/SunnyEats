@@ -41,3 +41,14 @@
 }
 
 -keepclassmembers enum hu.tvarga.sunnyeats.**ApiObject { *; }
+
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.android.gms.**
+
+-keep class org.joda.time.** { *; }
+
+-keep okhttp3.internal.platform.** { *; }
+
+-keep com.google.maps.internal.** { *; }
+
+-keep com.google.maps.GaeRequestHandler { *; }
