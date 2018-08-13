@@ -56,3 +56,59 @@
 
 -keep class com.google.maps.GaeRequestHandler { *; }
 -dontwarn com.google.maps.GaeRequestHandler
+
+#no obfuscation needed here
+-keep class com.** { *; }
+-keep class android.** { *; }
+-keep class org.** { *; }
+-keep class java.** { *; }
+-keep public class **.R { public *; }
+-keep public class **.R$* { public *; }
+
+# For enumeration classes, see http://proguard.sourceforge.net/manual/examples.html#enumerations
+-keepclassmembers enum * { *; }
+
+-dontwarn javax.inject.Inject
+-dontwarn javax.annotation.Nullable
+
+-keep class **.Finalizer
+
+#Keep all annotations
+-keepattributes **
+
+-keepclassmembers class * {
+    @javax.annotation.** *;
+}
+
+# Dagger
+-keepclassmembers,allowobfuscation class * {
+    @javax.inject.* *;
+}
+-keep class javax.inject.* { *; }
+
+
+# Butterknife
+-keep @interface butterknife.*
+
+-keepclasseswithmembers class * {
+    @butterknife.* <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @butterknife.* <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @butterknife.On* <methods>;
+}
+
+
+-keep class **$$ViewInjector {
+    public static void inject(...);
+    public static void reset(...);
+}
+
+-keep class **$$ViewBinder {
+    public static void bind(...);
+    public static void unbind(...);
+}

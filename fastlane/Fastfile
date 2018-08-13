@@ -23,6 +23,16 @@ platform :android do
   		task: "app:assembleRelease"
   	)
 
+  	hockey(
+    	api_token: ENV['HOCKEY_APP_TOKEN'],
+    	notes: "Latest SunnyEats app",
+    	notify: "2",
+    	status: "2",
+    	apk: Actions.lane_context[Actions::SharedValues::GRADLE_APK_OUTPUT_PATH],
+    	dsym: "./app/build/outputs/mapping/release/mapping.txt",
+    	public_identifier: "778d3ad77d3942c28ef32fb0ec9381c6"
+    )
+
   end
 
   lane :increment_version do
