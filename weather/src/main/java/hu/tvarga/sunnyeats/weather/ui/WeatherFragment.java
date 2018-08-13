@@ -10,10 +10,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.annimon.stream.Optional;
@@ -34,6 +37,7 @@ import hu.tvarga.sunnyeats.weather.ForecastState;
 import hu.tvarga.sunnyeats.weather.R;
 import hu.tvarga.sunnyeats.weather.R2;
 import hu.tvarga.sunnyeats.weather.dto.Forecast;
+import hu.tvarga.sunnyeats.weather.dto.ForecastListElement;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 import timber.log.Timber;
@@ -54,34 +58,22 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 	TextView weatherDescription;
 
 	@BindView(R2.id.weatherTemp)
-	TextView weatherTemp;
+	android.support.v7.widget.AppCompatTextView weatherTemp;
 
-	@BindView(R2.id.weatherHumidity)
-	TextView weatherHumidity;
+	@BindView(R2.id.weatherTempUnit)
+	TextView weatherTempUnit;
 
-	@BindView(R2.id.weatherWindSpeed)
-	TextView weatherWindSpeed;
+	@BindView(R2.id.weatherCloudsImage)
+	ImageView weatherCloudsImage;
 
-	@BindView(R2.id.weatherWindDegree)
-	TextView weatherWindDegree;
+	@BindView(R2.id.weatherViewPager)
+	ViewPager weatherViewPager;
 
-	@BindView(R2.id.weatherClouds)
-	TextView weatherClouds;
+	@BindView(R2.id.weatherForecastRecyclerView)
+	RecyclerView weatherForecastRecyclerView;
 
-	@BindView(R2.id.weatherTempMin)
-	TextView weatherTempMin;
-
-	@BindView(R2.id.weatherTempMax)
-	TextView weatherTempMax;
-
-	@BindView(R2.id.weatherPressure)
-	TextView weatherPressure;
-
-	@BindView(R2.id.weatherSeaLevel)
-	TextView weatherSeaLevel;
-
-	@BindView(R2.id.weatherGroundLevel)
-	TextView weatherGroundLevel;
+	@Inject
+	WeatherForecastAdapter weatherForecastAdapter;
 
 	@Inject
 	ForecastViewModel.ForecastViewModelFactory forecastViewModelFactory;
@@ -89,6 +81,8 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 	ForecastViewModel forecastViewModel;
 
 	private AlertDialog alert;
+
+	private WeatherViewPagerAdapter weatherViewPagerAdapter;
 
 	public static WeatherFragment create() {
 		return new WeatherFragment();
@@ -99,6 +93,17 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.weather_fragment, container, false);
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		weatherForecastRecyclerView.setAdapter(weatherForecastAdapter);
+		if (weatherViewPagerAdapter == null) {
+			weatherViewPagerAdapter = new WeatherViewPagerAdapter(getChildFragmentManager());
+		}
+		weatherViewPager.setAdapter(weatherViewPagerAdapter);
 	}
 
 	@Override
@@ -186,19 +191,17 @@ public class WeatherFragment extends BaseFragment implements EasyPermissions.Per
 			Optional<Forecast> forecastOptional = forecastState.forecast();
 			if (forecastOptional.isPresent()) {
 				Forecast forecast = forecastOptional.get();
+				ForecastListElement forecastListElementFirst = forecast.list().get(0);
+				CloudIconHelper.setCloudIcon(weatherCloudsImage, forecastListElementFirst);
 				weatherCityName.setText(forecast.city().name());
 				weatherDay.setText(forecastViewModel.getDay(0));
 				weatherDescription.setText(forecastViewModel.getDescription(0));
 				weatherTemp.setText(forecastViewModel.getTemp(0));
-				weatherHumidity.setText(forecastViewModel.getHumidity(0));
-				weatherWindSpeed.setText(forecastViewModel.getWindSpeed(0));
-				weatherWindDegree.setText(forecastViewModel.getWindDegree(0));
-				weatherClouds.setText(forecastViewModel.getClouds(0));
-				weatherTempMin.setText(forecastViewModel.getTempMin(0));
-				weatherTempMax.setText(forecastViewModel.getTempMax(0));
-				weatherPressure.setText(forecastViewModel.getPressure(0));
-				weatherSeaLevel.setText(forecastViewModel.getSeaLevel(0));
-				weatherGroundLevel.setText(forecastViewModel.getGroundLevel(0));
+				weatherTempUnit.setText(getString(R.string.weather_degree_c));
+				weatherForecastAdapter.setWeatherForecast(forecast.list());
+				weatherForecastAdapter.notifyDataSetChanged();
+				weatherViewPagerAdapter.setForecastListElement(forecastListElementFirst);
+				weatherViewPagerAdapter.notifyDataSetChanged();
 			}
 			else if (forecastStateAsyncState.loading()) {
 				// show loading
