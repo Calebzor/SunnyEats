@@ -30,7 +30,7 @@ allprojects {
 	allprojects {
 		project.ext {
 			globalCompileSDK = 27
-			globalMinSDK = 19
+			globalMinSDK = 21
 			globalTargetSDK = 27
 		}
 
