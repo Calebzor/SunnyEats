@@ -16,6 +16,7 @@ import hu.tvarga.sunnyeats.common.app.state.AsyncState;
 import hu.tvarga.sunnyeats.common.app.state.Dispatcher;
 import hu.tvarga.sunnyeats.common.app.ui.AndroidStrings;
 import hu.tvarga.sunnyeats.common.app.ui.Strings;
+import hu.tvarga.sunnyeats.restaurants.RestaurantsState;
 import hu.tvarga.sunnyeats.weather.ForecastState;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,10 +32,11 @@ public class BaseApplicationModule {
 
 	@ApplicationScoped
 	@Provides
-	Store<AppState> provideAppStateStore(Reducer<AsyncState<ForecastState>> forecastStateReducer) {
+	Store<AppState> provideAppStateStore(Reducer<AsyncState<ForecastState>> forecastStateReducer,
+			Reducer<AsyncState<RestaurantsState>> restaurantsStateReducer) {
 
 		AppStateReducer appStateReducer = AppStateReducer.builder().forecastReducer(
-				forecastStateReducer).build();
+				forecastStateReducer).restaurantsReducer(restaurantsStateReducer).build();
 
 		return Store.create(appStateReducer);
 	}

@@ -2,8 +2,8 @@ package hu.tvarga.sunnyeats.weather.api.dao;
 
 public class CoordApiObject {
 
-	public String lat;
+	public double lat;
 
-	public String lon;
+	public double lon;
 
 }

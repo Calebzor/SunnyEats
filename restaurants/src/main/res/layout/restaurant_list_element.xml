@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginBottom="1dp"
+	android:background="@android:color/white"
+	android:padding="@dimen/marginTiny">
+
+	<ImageView
+		android:id="@+id/restaurantImage"
+		android:layout_width="@dimen/restaurantsListImageSize"
+		android:layout_height="@dimen/restaurantsListImageSize"
+		android:padding="@dimen/marginTiny"
+		android:scaleType="centerCrop"
+		android:src="@drawable/ic_baseline_restaurant_24px" />
+
+	<TextView
+		android:id="@+id/restaurantName"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/marginSmall"
+		android:layout_marginTop="@dimen/marginSmall"
+		app:layout_constraintEnd_toStartOf="@id/restaurantDirection"
+		app:layout_constraintStart_toEndOf="@+id/restaurantImage"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:text="Name" />
+
+	<ImageView
+		android:id="@+id/restaurantCityLocationMarker"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/marginSmall"
+		android:layout_marginTop="@dimen/marginSmall"
+		android:src="@drawable/ic_baseline_location_on_24px"
+		app:layout_constraintStart_toEndOf="@+id/restaurantImage"
+		app:layout_constraintTop_toBottomOf="@id/restaurantName" />
+
+	<TextView
+		android:id="@+id/restaurantCity"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toBottomOf="@id/restaurantCityLocationMarker"
+		app:layout_constraintStart_toEndOf="@id/restaurantCityLocationMarker"
+		app:layout_constraintTop_toTopOf="@id/restaurantCityLocationMarker"
+		tools:text="City" />
+
+	<TextView
+		android:id="@+id/restaurantRating"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/marginSmall"
+		android:layout_marginTop="@dimen/marginSmall"
+		android:textColor="@color/restaurant_rating"
+		app:layout_constraintStart_toEndOf="@+id/restaurantImage"
+		app:layout_constraintTop_toBottomOf="@id/restaurantCityLocationMarker"
+		tools:text="5.0" />
+
+	<ImageView
+		android:id="@+id/restaurantStar1"
+		android:layout_width="@dimen/ratingStarSize"
+		android:layout_height="@dimen/ratingStarSize"
+		android:src="@drawable/ic_baseline_star_rate_18px"
+		app:layout_constraintBottom_toBottomOf="@+id/restaurantRating"
+		app:layout_constraintStart_toEndOf="@+id/restaurantRating"
+		app:layout_constraintTop_toTopOf="@+id/restaurantRating" />
+
+	<ImageView
+		android:id="@+id/restaurantStar2"
+		android:layout_width="@dimen/ratingStarSize"
+		android:layout_height="@dimen/ratingStarSize"
+		android:src="@drawable/ic_baseline_star_rate_18px"
+		app:layout_constraintBottom_toBottomOf="@+id/restaurantRating"
+		app:layout_constraintStart_toEndOf="@+id/restaurantStar1"
+		app:layout_constraintTop_toTopOf="@+id/restaurantRating" />
+
+	<ImageView
+		android:id="@+id/restaurantStar3"
+		android:layout_width="@dimen/ratingStarSize"
+		android:layout_height="@dimen/ratingStarSize"
+		android:src="@drawable/ic_baseline_star_rate_18px"
+		app:layout_constraintBottom_toBottomOf="@+id/restaurantRating"
+		app:layout_constraintStart_toEndOf="@+id/restaurantStar2"
+		app:layout_constraintTop_toTopOf="@+id/restaurantRating" />
+
+	<ImageView
+		android:id="@+id/restaurantStar4"
+		android:layout_width="@dimen/ratingStarSize"
+		android:layout_height="@dimen/ratingStarSize"
+		android:src="@drawable/ic_baseline_star_rate_18px"
+		app:layout_constraintBottom_toBottomOf="@+id/restaurantRating"
+		app:layout_constraintStart_toEndOf="@+id/restaurantStar3"
+		app:layout_constraintTop_toTopOf="@+id/restaurantRating" />
+
+	<ImageView
+		android:id="@+id/restaurantStar5"
+		android:layout_width="@dimen/ratingStarSize"
+		android:layout_height="@dimen/ratingStarSize"
+		android:src="@drawable/ic_baseline_star_rate_18px"
+		app:layout_constraintBottom_toBottomOf="@+id/restaurantRating"
+		app:layout_constraintStart_toEndOf="@+id/restaurantStar4"
+		app:layout_constraintTop_toTopOf="@+id/restaurantRating" />
+
+	<ImageButton
+		android:id="@+id/restaurantDirection"
+		android:layout_width="wrap_content"
+		android:layout_height="0dp"
+		android:background="@drawable/button_transparent_background"
+		android:paddingStart="@dimen/margin"
+		android:paddingEnd="@dimen/marginSmall"
+		android:src="@drawable/ic_baseline_directions_24px"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toBottomOf="@id/restaurantRating"
+		tools:layout_editor_absoluteY="0dp" />
+
+</android.support.constraint.ConstraintLayout>

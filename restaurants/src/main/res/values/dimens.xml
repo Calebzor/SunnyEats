@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="ratingStarSize">14dp</dimen>
+	<dimen name="restaurantsListImageSize">80dp</dimen>
+	<dimen name="restaurantFilterButtonPadding">48dp</dimen>
+</resources>

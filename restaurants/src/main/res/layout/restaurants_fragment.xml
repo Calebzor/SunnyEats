@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	xmlns:tools="http://schemas.android.com/tools">
+	android:layout_height="match_parent">
 
-	<TextView
-		android:id="@+id/weatherCityName"
-		android:layout_width="wrap_content"
+	<Button
+		android:id="@+id/restaurantSortButton"
+		android:layout_width="0dp"
 		android:layout_height="wrap_content"
-		tools:text="Budapest" />
+		android:layout_marginEnd="1dp"
+		android:background="@drawable/button_white_background"
+		android:drawableStart="@drawable/ic_baseline_sort_24px"
+		android:paddingEnd="@dimen/restaurantFilterButtonPadding"
+		android:paddingStart="@dimen/restaurantFilterButtonPadding"
+		android:text="@string/restaurant_button_sortBy"
+		android:textAllCaps="true"
+		app:layout_constraintEnd_toStartOf="@id/restaurantFilterButton"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<Button
+		android:id="@+id/restaurantFilterButton"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="1dp"
+		android:background="@drawable/button_white_background"
+		android:drawableStart="@drawable/ic_baseline_filter_list_24px"
+		android:paddingEnd="@dimen/restaurantFilterButtonPadding"
+		android:paddingStart="@dimen/restaurantFilterButtonPadding"
+		android:text="@string/restaurant_button_filter"
+		android:textAllCaps="true"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/restaurantSortButton" />
+
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/restaurantsRecyclerView"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_marginTop="1dp"
+		app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/restaurantSortButton"
+		tools:listitem="@layout/restaurant_list_element" />
 
 </android.support.constraint.ConstraintLayout>
