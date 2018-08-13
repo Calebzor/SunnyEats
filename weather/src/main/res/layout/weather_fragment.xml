@@ -1,93 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical">
+	android:background="@color/colorCommonPrimaryOff"
+	android:paddingTop="@dimen/weather_spacing">
+
+	<Button
+		android:id="@+id/weatherPopularRestaurantsButton"
+		android:layout_width="wrap_content"
+		android:layout_height="36dp"
+		android:layout_marginEnd="@dimen/margin"
+		android:background="@drawable/button_selector"
+		android:paddingEnd="@dimen/margin"
+		android:paddingStart="@dimen/margin"
+		android:text="@string/common_popular_restaurants"
+		android:textAllCaps="true"
+		android:textColor="@android:color/white"
+		android:textSize="10sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/weatherCityName"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:ignore="SmallSp" />
 
 	<TextView
 		android:id="@+id/weatherCityName"
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
 		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/margin"
+		android:ellipsize="end"
+		android:lines="1"
+		android:textColor="@color/colorCommonPrimaryDark"
+		android:textSize="24sp"
+		android:textStyle="bold"
+		app:layout_constraintEnd_toStartOf="@id/weatherPopularRestaurantsButton"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
 		tools:text="Budapest" />
 
 	<TextView
 		android:id="@+id/weatherDay"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/margin"
+		android:textColor="@color/colorCommonPrimary"
+		android:textSize="18sp"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/weatherCityName"
 		tools:text="Sunday" />
 
 	<TextView
 		android:id="@+id/weatherDescription"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		tools:text="Sunday" />
+		android:layout_marginStart="@dimen/margin"
+		android:paddingBottom="@dimen/weather_spacing"
+		android:textColor="@color/colorCommonPrimary"
+		android:textSize="14sp"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/weatherDay"
+		tools:text="light rain" />
 
-	<TextView
+	<ImageView
+		android:id="@+id/weatherCloudsImage"
+		android:layout_width="@dimen/weather_temp_size"
+		android:layout_height="@dimen/weather_temp_size"
+		app:layout_constraintEnd_toStartOf="@id/splittingGuideline"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/weatherDescription"
+		tools:src="@drawable/sunny" />
+
+	<android.support.constraint.Guideline
+		android:id="@+id/splittingGuideline"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		app:layout_constraintGuide_percent="0.5" />
+
+	<android.support.v7.widget.AppCompatTextView
 		android:id="@+id/weatherTemp"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		tools:text="37 C" />
+		android:layout_width="@dimen/weather_temp_size"
+		android:layout_height="@dimen/weather_temp_size"
+		android:gravity="end"
+		android:lines="1"
+		app:autoSizeTextType="uniform"
+		app:layout_constraintEnd_toStartOf="@id/weatherTempUnit"
+		app:layout_constraintStart_toEndOf="@id/splittingGuideline"
+		app:layout_constraintTop_toBottomOf="@id/weatherDescription"
+		tools:text="37" />
 
 	<TextView
-		android:id="@+id/weatherHumidity"
+		android:id="@+id/weatherTempUnit"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		tools:text="34%" />
+		android:layout_marginEnd="@dimen/margin"
+		app:layout_constraintBaseline_toBaselineOf="@+id/weatherTemp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/weatherTemp"
+		tools:text="@string/weather_degree_c" />
 
-	<TextView
-		android:id="@+id/weatherWindSpeed"
+	<android.support.v4.view.ViewPager
+		android:id="@+id/weatherViewPager"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_marginTop="@dimen/weather_spacing"
+		android:paddingBottom="@dimen/weather_spacing"
+		app:layout_constraintBottom_toTopOf="@id/weatherForecastRecyclerView"
+		app:layout_constraintTop_toBottomOf="@id/weatherCloudsImage" />
+
+	<com.rd.PageIndicatorView
+		android:id="@+id/pageIndicatorView"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		tools:text="29 km/h" />
+		android:layout_below="@id/weatherViewPager"
+		android:layout_marginBottom="@dimen/weather_spacing"
+		app:layout_constraintBottom_toTopOf="@id/weatherForecastRecyclerView"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/weatherViewPager"
+		app:piv_animationType="worm"
+		app:piv_dynamicCount="true"
+		app:piv_interactiveAnimation="true"
+		app:piv_padding="15dp"
+		app:piv_radius="5dp"
+		app:piv_selectedColor="@color/colorCommonAccent"
+		app:piv_unselectedColor="@android:color/white"
+		app:piv_viewPager="@id/weatherViewPager" />
 
-	<TextView
-		android:id="@+id/weatherWindDegree"
-		android:layout_width="wrap_content"
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/weatherForecastRecyclerView"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		tools:text="229" />
+		android:background="@android:color/white"
+		android:orientation="horizontal"
+		app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/pageIndicatorView"
+		tools:listitem="@layout/weather_forecast_list_item"
+		/>
 
-	<TextView
-		android:id="@+id/weatherClouds"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		tools:text="88%" />
-
-	<TextView
-		android:id="@+id/weatherTempMin"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		tools:text="36 C" />
-
-	<TextView
-		android:id="@+id/weatherTempMax"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		tools:text="38 C" />
-
-	<TextView
-		android:id="@+id/weatherPressure"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		tools:text="1000 hPa" />
-
-	<TextView
-		android:id="@+id/weatherSeaLevel"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		tools:text="1001 hPa" />
-
-	<TextView
-		android:id="@+id/weatherGroundLevel"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		tools:text="1002 hPa" />
-
-	<Button
-		android:id="@+id/weatherPopularRestaurantsButton"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textAllCaps="true"
-		android:text="@string/common_popular_restaurants" />
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

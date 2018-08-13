@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<android.support.constraint.Guideline
+		android:id="@+id/splittingGuidelineFirst"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		app:layout_constraintGuide_percent="0.2" />
+
+	<TextView
+		android:id="@+id/weatherViewPagerFirstValue"
+		style="@style/weather_view_pager_value"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toEndOf="@id/splittingGuidelineFirst"
+		tools:text="10" />
+
+	<TextView
+		android:id="@+id/weatherViewPagerFirstUnit"
+		style="@style/weather_view_pager_value_unit"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBaseline_toBaselineOf="@id/weatherViewPagerFirstValue"
+		app:layout_constraintStart_toStartOf="@id/splittingGuidelineFirst"
+		tools:text="%" />
+
+	<TextView
+		android:id="@+id/weatherViewPagerFirstDescription"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toEndOf="@id/weatherViewPagerFirstUnit"
+		app:layout_constraintStart_toStartOf="@id/weatherViewPagerFirstValue"
+		app:layout_constraintTop_toBottomOf="@id/weatherViewPagerFirstValue"
+		tools:text="Precipitation" />
+
+	<android.support.constraint.Guideline
+		android:id="@+id/splittingGuidelineSecond"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		app:layout_constraintGuide_percent="0.5" />
+
+	<TextView
+		android:id="@+id/weatherViewPagerSecondValue"
+		style="@style/weather_view_pager_value"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toEndOf="@id/splittingGuidelineSecond"
+		tools:text="34" />
+
+	<TextView
+		android:id="@+id/weatherViewPagerSecondUnit"
+		style="@style/weather_view_pager_value_unit"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBaseline_toBaselineOf="@id/weatherViewPagerSecondValue"
+		app:layout_constraintStart_toStartOf="@id/splittingGuidelineSecond"
+		tools:text="%" />
+
+	<TextView
+		android:id="@+id/weatherViewPagerSecondDescription"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toEndOf="@id/weatherViewPagerSecondUnit"
+		app:layout_constraintStart_toStartOf="@id/weatherViewPagerSecondValue"
+		app:layout_constraintTop_toBottomOf="@id/weatherViewPagerSecondValue"
+		tools:text="Humidity" />
+
+	<android.support.constraint.Guideline
+		android:id="@+id/splittingGuidelineThird"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		app:layout_constraintGuide_percent="0.8" />
+
+	<TextView
+		android:id="@+id/weatherViewPagerThirdValue"
+		style="@style/weather_view_pager_value"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toEndOf="@id/splittingGuidelineThird"
+		tools:text="29" />
+
+	<TextView
+		android:id="@+id/weatherViewPagerThirdUnit"
+		style="@style/weather_view_pager_value_unit"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBaseline_toBaselineOf="@id/weatherViewPagerThirdValue"
+		app:layout_constraintStart_toStartOf="@id/splittingGuidelineThird"
+		tools:text="km/h" />
+
+	<TextView
+		android:id="@+id/weatherViewPagerThirdDescription"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toEndOf="@id/weatherViewPagerThirdUnit"
+		app:layout_constraintStart_toStartOf="@id/weatherViewPagerThirdValue"
+		app:layout_constraintTop_toBottomOf="@id/weatherViewPagerThirdValue"
+		tools:text="Wind" />
+
+</android.support.constraint.ConstraintLayout>

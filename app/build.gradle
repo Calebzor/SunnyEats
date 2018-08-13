@@ -65,6 +65,8 @@ dependencies {
 
 	implementation 'com.google.maps:google-maps-services:0.2.9'
 	implementation 'org.slf4j:slf4j-nop:1.7.25'
+
+	implementation 'com.romandanylyk:pageindicatorview:1.0.1'
 }
 
 def getAndroidTestCoverageFiles() {

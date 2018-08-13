@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:paddingBottom="@dimen/margin"
+	android:paddingEnd="@dimen/marginSmall"
+	android:paddingStart="@dimen/marginSmall"
+	android:paddingTop="@dimen/margin">
+
+	<TextView
+		android:id="@+id/weatherListItemDay"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAllCaps="true"
+		android:textColor="@android:color/black"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:text="Mon" />
+
+	<TextView
+		android:id="@+id/weatherListItemHour"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@android:color/black"
+		android:textSize="12sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/weatherListItemDay"
+		tools:text="12h" />
+
+	<ImageView
+		android:id="@+id/weatherListItemCloudyImage"
+		android:layout_width="24dp"
+		android:layout_height="24dp"
+		android:layout_marginTop="@dimen/margin"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/weatherListItemHour"
+		tools:src="@drawable/sunny" />
+
+	<TextView
+		android:id="@+id/weatherListItemTempMax"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/marginSmall"
+		android:textColor="@android:color/black"
+		android:textSize="12sp"
+		app:layout_constraintEnd_toStartOf="@id/weatherListItemTempMin"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/weatherListItemCloudyImage"
+		tools:text="37°" />
+
+	<TextView
+		android:id="@+id/weatherListItemTempMin"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/marginSmall"
+		android:textColor="@color/lightGrey"
+		android:textSize="12sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/weatherListItemTempMax"
+		app:layout_constraintTop_toBottomOf="@id/weatherListItemCloudyImage"
+		tools:text="18°" />
+
+</android.support.constraint.ConstraintLayout>

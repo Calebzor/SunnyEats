@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,6 +27,7 @@ import hu.tvarga.sunnyeats.restaurants.R;
 import hu.tvarga.sunnyeats.restaurants.R2;
 import hu.tvarga.sunnyeats.restaurants.RestaurantsState;
 import hu.tvarga.sunnyeats.restaurants.dto.Restaurant;
+import timber.log.Timber;
 
 import static hu.tvarga.sunnyeats.common.dto.City.CITY_EXTRA_KEY;
 
@@ -44,6 +48,26 @@ public class RestaurantsFragment extends BaseFragment {
 		return new RestaurantsFragment();
 	}
 
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.searchMenuItem) {
+			Timber.d("NYI");
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.main_menu, menu);
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -54,6 +78,8 @@ public class RestaurantsFragment extends BaseFragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
+		setToolbarTitle(R.string.nearby_restaurant);
 
 		restaurantsRecyclerView.setAdapter(restaurantAdapter);
 	}

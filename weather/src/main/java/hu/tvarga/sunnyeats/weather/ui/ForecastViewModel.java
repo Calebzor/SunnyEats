@@ -17,6 +17,7 @@ import hu.tvarga.sunnyeats.common.app.state.AsyncState;
 import hu.tvarga.sunnyeats.common.app.ui.Strings;
 import hu.tvarga.sunnyeats.common.dto.City;
 import hu.tvarga.sunnyeats.location.LocationLiveData;
+import hu.tvarga.sunnyeats.weather.Constants;
 import hu.tvarga.sunnyeats.weather.ForecastState;
 import hu.tvarga.sunnyeats.weather.R;
 import hu.tvarga.sunnyeats.weather.dto.Forecast;
@@ -101,87 +102,8 @@ public class ForecastViewModel extends ViewModel {
 	public String getTemp(int index) {
 		ForecastListElement forecastListElement = getForecastListElement(index);
 		if (forecastListElement != null) {
-			return strings.getString(R.string.weather_unit_celsius,
+			return String.format(localeProvider.getCurrentLocale(), Constants.NO_PRECISION,
 					forecastListElement.forecastMain().temp());
-		}
-		return getNa();
-	}
-
-	public String getHumidity(int index) {
-		ForecastListElement forecastListElement = getForecastListElement(index);
-		if (forecastListElement != null) {
-			return String.format("%s%%", forecastListElement.forecastMain().humidity());
-		}
-		return getNa();
-	}
-
-	public String getWindSpeed(int index) {
-		ForecastListElement forecastListElement = getForecastListElement(index);
-		if (forecastListElement != null) {
-			return strings.getString(R.string.weather_unit_wind_speed,
-					forecastListElement.forecastWind().speed());
-		}
-		return getNa();
-	}
-
-	public String getWindDegree(int index) {
-		ForecastListElement forecastListElement = getForecastListElement(index);
-		if (forecastListElement != null) {
-			return strings.getString(R.string.weather_unit_wind_degree,
-					forecastListElement.forecastWind().deg());
-		}
-		return getNa();
-	}
-
-	public String getClouds(int index) {
-		ForecastListElement forecastListElement = getForecastListElement(index);
-		if (forecastListElement != null) {
-			return String.format("%s%%", forecastListElement.forecastClouds().all());
-		}
-		return getNa();
-	}
-
-	public String getTempMin(int index) {
-		ForecastListElement forecastListElement = getForecastListElement(index);
-		if (forecastListElement != null) {
-			return strings.getString(R.string.weather_unit_celsius,
-					forecastListElement.forecastMain().tempMin());
-		}
-		return getNa();
-	}
-
-	public String getTempMax(int index) {
-		ForecastListElement forecastListElement = getForecastListElement(index);
-		if (forecastListElement != null) {
-			return strings.getString(R.string.weather_unit_celsius,
-					forecastListElement.forecastMain().tempMax());
-		}
-		return getNa();
-	}
-
-	public String getPressure(int index) {
-		ForecastListElement forecastListElement = getForecastListElement(index);
-		if (forecastListElement != null) {
-			return strings.getString(R.string.weather_unit_hpa,
-					forecastListElement.forecastMain().pressure());
-		}
-		return getNa();
-	}
-
-	public String getSeaLevel(int index) {
-		ForecastListElement forecastListElement = getForecastListElement(index);
-		if (forecastListElement != null) {
-			return strings.getString(R.string.weather_unit_hpa,
-					forecastListElement.forecastMain().seaLevel());
-		}
-		return getNa();
-	}
-
-	public String getGroundLevel(int index) {
-		ForecastListElement forecastListElement = getForecastListElement(index);
-		if (forecastListElement != null) {
-			return strings.getString(R.string.weather_unit_hpa,
-					forecastListElement.forecastMain().groundLevel());
 		}
 		return getNa();
 	}

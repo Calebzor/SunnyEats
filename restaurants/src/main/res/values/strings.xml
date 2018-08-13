@@ -2,4 +2,6 @@
 	<string name="app_name">restaurants</string>
 	<string name="restaurant_button_sortBy">Sort by</string>
 	<string name="restaurant_button_filter">Filter</string>
+	<string name="search">search</string>
+	<string name="nearby_restaurant">Nearby restaurant</string>
 </resources>

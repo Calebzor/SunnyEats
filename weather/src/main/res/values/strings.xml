@@ -2,12 +2,18 @@
 	<string name="app_name">weather</string>
 
 	<string name="weather_unit_celsius">%s C</string>
-	<string name="weather_unit_hpa">%s hPa</string>
-	<string name="weather_unit_wind_speed">%s m/s</string>
-	<string name="weather_unit_wind_degree">%s deg</string>
+	<string name="weather_unit_celsius_no_precision">%.0f C</string>
+	<string name="weather_unit_hpa">hPa</string>
+	<string name="weather_unit_wind_speed">m/s</string>
+	<string name="weather_unit_wind_degree">deg</string>
 
+	<string name="weather_degree">%.0f °</string>
+	<string name="weather_degree_c">°C</string>
+	<string name="weather_percentage">%</string>
+	<string name="weather_hour_display">%sh</string>
 	<string name="weather_humidity">Humidity</string>
 	<string name="weather_wind">Wind</string>
+	<string name="weather_pressure">Pressure</string>
 	<string name="weather_sea_level">Sea level</string>
 	<string name="weather_ground_level">Ground level</string>
 	<string name="weather_clouds">Clouds</string>
@@ -23,4 +29,5 @@
 
 	<string name="weather_locationDialog_permissionDeniedRational">"The app can't be used without
 		this permission"</string>
+
 </resources>
